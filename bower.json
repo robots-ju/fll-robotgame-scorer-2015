@@ -1,0 +1,29 @@
+{
+  "name": "fll-robotgame-scorer-2015",
+  "description": "Unofficial JS score calculator for the 2015 FLL Robot Game",
+  "authors": [
+    "Clark Winkelmann <clark.winkelmann@gmail.com>"
+  ],
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "fll",
+    "robotgame",
+    "scorer",
+    "2015"
+  ],
+  "license": "MIT",
+  "homepage": "https://robots-ju.ch",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests",
+	"nbproject",,
+	".gitignore",
+	"package.json",
+	"karma.conf.js"
+  ]
+}
