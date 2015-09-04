@@ -17,12 +17,12 @@
   "license": "MIT",
   "homepage": "https://robots-ju.ch",
   "ignore": [
-    "**/.*",
     "node_modules",
     "bower_components",
     "tests",
-	"nbproject",,
+	"nbproject",
 	".gitignore",
+	".travis.yml",
 	"package.json",
 	"karma.conf.js"
   ]
