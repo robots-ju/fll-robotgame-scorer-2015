@@ -1,5 +1,7 @@
 # FLL Robot Game Scorer 2015
 
+[![Build Status](https://travis-ci.org/robots-ju/fll-robotgame-scorer-2015.svg)](https://travis-ci.org/robots-ju/fll-robotgame-scorer-2015)
+
 This package contains an **unoffical** javascript score calculator for the FLL 2015 Robot Game competition.
 
 While the aim is to perfectly fit the specifications, please note there is absolutely no garantee that it will work smoothly for you.
