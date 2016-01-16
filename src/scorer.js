@@ -41,9 +41,8 @@
 		// each other when computing points for the M04 mission
 		m01_own_yellow_bin_in_other_safety: false,
 		m01_own_blue_bin_in_other_safety: false,
-		// Bins from the opponents are reprented by an number as it's not
-		// important which one arrives in our safety (they score identically)
-		m01_other_bins_in_own_safety: 0,
+		m01_other_yellow_bin_in_own_safety: false,
+		m01_other_blue_bin_in_own_safety: false,
 		m02_methanes_collected: 0,
 		m03_truck_supports_bin: false,
 		m03_bin_east_of_guide: false,
@@ -103,28 +102,43 @@
 		if(missions.hasOwnProperty('m01_own_yellow_bin_in_other_safety'))
 		{
 			/**
-			 * 2015.08.27, Page 23, M01, Specific physical requirement
+			 * 2016.01.16, Page 23, M01, Specific physical requirement
+			 * "Visible at the end of the match: Green Bin containing at least one matching Yellow or Blue Bar"
 			 * "Value: 60 per bin in either safety"
 			 */
-			score += missions.m01_own_yellow_bin_in_other_safety ? 60 : 0;
+			if(missions.m04_yellow_bars_in_correct_bin > 0) {
+				score += missions.m01_own_yellow_bin_in_other_safety ? 60 : 0;
+			}
 		}
 
 		if(missions.hasOwnProperty('m01_own_blue_bin_in_other_safety'))
 		{
 			/**
-			 * 2015.08.27, Page 23, M01, Specific physical requirement
+			 * 2016.01.16, Page 23, M01, Specific physical requirement
+			 * "Visible at the end of the match: Green Bin containing at least one matching Yellow or Blue Bar"
 			 * "Value: 60 per bin in either safety"
 			 */
-			score += missions.m01_own_blue_bin_in_other_safety ? 60 : 0;
+			if(missions.m04_blue_bars_in_correct_bin > 0) {
+				score += missions.m01_own_blue_bin_in_other_safety ? 60 : 0;
+			}
 		}
 
-		if(missions.hasOwnProperty('m01_other_bins_in_own_safety'))
+		if(missions.hasOwnProperty('m01_other_yellow_bin_in_own_safety'))
 		{
 			/**
 			 * 2015.08.27, Page 23, M01, Specific physical requirement
 			 * "Value: 60 per bin in either safety"
 			 */
-			score += missions.m01_other_bins_in_own_safety * 60;
+			score += missions.m01_other_yellow_bin_in_own_safety ? 60 : 0;
+		}
+
+		if(missions.hasOwnProperty('m01_other_blue_bin_in_own_safety'))
+		{
+			/**
+			 * 2015.08.27, Page 23, M01, Specific physical requirement
+			 * "Value: 60 per bin in either safety"
+			 */
+			score += missions.m01_other_blue_bin_in_own_safety ? 60 : 0;
 		}
 
 		/*
@@ -208,14 +222,14 @@
 			}
 
 			/**
-			 * 2015.08.27, Page 24, M04, Specific physical requirement, Yellow/blue bars
-			 * "Value: Per Bar (See M01 on page 23) is completely in the other team’s Safety, by way of your East Transfer"
-			 * TODO: the number of points is missing from the rules.
-			 * It should be added when known
+			 * 2016.01.16, Page 24, M04, Specific physical requirement, Yellow/blue bars
+			 * "Value: Per Bin (See M01 on page 23) is completely in the other team’s Safety, by way of your West Transfer"
+			 *
+			 * Only the bin points (M01) are taken in account. We add nothing here
 			 */
 			if(binInOtherSafety)
 			{
-				score += barsInCorrectBin * 0;
+				// No point is added
 			}
 			/**
 			 * 2015.08.27, Page 24, M04, Specific physical requirement, Yellow/blue bars

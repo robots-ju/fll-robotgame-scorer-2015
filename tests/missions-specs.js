@@ -66,27 +66,43 @@ describe('Robot Game 2015 specifications', function() {
 		/**
 		 * 2015.08.27, Page 23, M01, Specific physical requirement
 		 * "Value: 60 per bin in either safety"
-		 *
-		 * TODO: should the scorer check there is a valid bar inside the bin
-		 *       we send to the other team ?
 		 */
 		it('Scores 60 points per bin', function()
 		{
 			expect(FllScorer.computeScore({
-				m01_own_yellow_bin_in_other_safety: true
+				m01_own_yellow_bin_in_other_safety: true,
+				m04_yellow_bars_in_correct_bin: 1
 			})).toEqual(60);
 
 			expect(FllScorer.computeScore({
-				m01_own_blue_bin_in_other_safety: true
+				m01_own_blue_bin_in_other_safety: true,
+				m04_blue_bars_in_correct_bin: 1
 			})).toEqual(60);
 
 			expect(FllScorer.computeScore({
-				m01_other_bins_in_own_safety: 1
+				m01_other_yellow_bin_in_own_safety: true
 			})).toEqual(60);
 
 			expect(FllScorer.computeScore({
-				m01_other_bins_in_own_safety: 2
-			})).toEqual(60*2);
+				m01_other_blue_bin_in_own_safety: true
+			})).toEqual(60);
+		});
+
+		/**
+		 * 2016.01.16, Page 23, M01, Specific physical requirement
+		 * "Visible at the end of the match: Green Bin containing at least one matching Yellow or Blue Bar"
+		 */
+		it('Scores nothing if bin is empty', function()
+		{
+			expect(FllScorer.computeScore({
+				m01_own_yellow_bin_in_other_safety: true,
+				m04_yellow_bars_in_correct_bin: 0
+			})).toEqual(0);
+
+			expect(FllScorer.computeScore({
+				m01_own_blue_bin_in_other_safety: true,
+				m04_blue_bars_in_correct_bin: 0
+			})).toEqual(0);
 		});
 
 	});
@@ -191,34 +207,27 @@ describe('Robot Game 2015 specifications', function() {
 			});
 
 			/**
-			 * 2015.08.27, Page 24, M04, Specific physical requirement, Yellow/blue bars
-			 * "Value: Per Bar (See M01 on page 23) is completely in the other team’s Safety, by way of your East Transfer"
-			 * TODO: the number of points is missing from the rules.
-			 * It should be added when known
+			 * 2016.01.16, Page 24, M04, Specific physical requirement, Yellow/blue bars
+			 * "Value: Per Bin (See M01 on page 23) is completely in the other team’s Safety, by way of your West Transfer"
+			 * 2015.08.27, Page 23, M01, Specific physical requirement
+			 * "Value: 60 per bin in either safety"
+			 *
+			 * So regardless to the number of bars in the bin, the score is 60
+			 * The empty bin case is tested in Mission 01
 			 */
-			xit('Scores XXXX points per bar in other team safety', function()
+			it('Scores no points per bar when bin is in other team safety', function()
 			{
 				// Yellow
 				expect(FllScorer.computeScore({
 					m01_own_yellow_bin_in_other_safety: true,
 					m04_yellow_bars_in_correct_bin: 1
-				})).toEqual(0); // TODO: see above
-
-				expect(FllScorer.computeScore({
-					m01_own_yellow_bin_in_other_safety: true,
-					m04_yellow_bars_in_correct_bin: 2
-				})).toEqual(0*2); // TODO: see above
+				})).toEqual(60 + 0);
 
 				// Blue
 				expect(FllScorer.computeScore({
 					m01_own_blue_bin_in_other_safety: true,
 					m04_blue_bars_in_correct_bin: 1
-				})).toEqual(0); // TODO: see above
-
-				expect(FllScorer.computeScore({
-					m01_own_blue_bin_in_other_safety: true,
-					m04_blue_bars_in_correct_bin: 2
-				})).toEqual(0*2); // TODO: see above
+				})).toEqual(60 + 0);
 			});
 
 			/**
