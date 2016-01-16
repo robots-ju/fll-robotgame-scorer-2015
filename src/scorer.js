@@ -60,9 +60,12 @@
 		 * "place the other Toy Plane in the Large Package which gets inserted in the Factory"
 		 * The big package is composed of two black bars
 		 *
-		 * This means there are 6 black bars in setup position
+		 * 2016.01.16, Page 11, Sorter
+		 * "Load two Blue and two Black Bars in the red tray as shown"
+		 *
+		 * This means there are 8 black bars in setup position
 		 */
-		m04_black_bars_in_flower_box_or_setup_position: 6,
+		m04_black_bars_in_flower_box_or_setup_position: 8,
 		m04_black_bars_in_matching_bin: 0,
 		m04_black_bars_anywhere_else: 0,
 		m05_one_person_in_sorter_area: false,

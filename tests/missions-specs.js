@@ -37,17 +37,20 @@ describe('Robot Game 2015 specifications', function() {
 		 * "place the other Toy Plane in the Large Package which gets inserted in the Factory"
 		 * The big package is composed of two black bars
 		 *
-		 * This means there are 6 black bars in setup position
+		 * 2016.01.16, Page 11, Sorter
+		 * "Load two Blue and two Black Bars in the red tray as shown"
+		 *
+		 * This means there are 8 black bars in setup position
 		 *
 		 * 2015.08.27, Page 24, M04, Specific physical requirement, Black bars
 		 * "Value: 8 Per Bar part of a scoring Flower Box, or in their original Setup position"
 		 *
 		 * As there is nothing else that scores points without touching it, the
-		 * initial score is 6 black bars * 8 points = 48 points
+		 * initial score is 8 black bars * 8 points = 64 points
 		 */
 		it('Should score base points', function()
 		{
-			expect(FllScorer.computeScore(FllScorer.initialMissionsState)).toEqual(48);
+			expect(FllScorer.computeScore(FllScorer.initialMissionsState)).toEqual(64);
 		});
 
 	});
