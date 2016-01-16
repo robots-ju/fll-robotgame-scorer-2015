@@ -19,8 +19,11 @@ describe('Robot Game 2015 specifications', function() {
 		/**
 		 * The scorer script should only take into account what is given in
 		 * the missions state argument
+		 *
+		 * Penalties is the only property where points are given/taken when their
+		 * value is 0, but they are only computed if the `penalties` key is given
 		 */
-		if('Should score no points if nothing is given', function()
+		it('Should score no points if nothing is given', function()
 		{
 			expect(FllScorer.computeScore({})).toEqual(0);
 		});
@@ -40,17 +43,20 @@ describe('Robot Game 2015 specifications', function() {
 		 * 2016.01.16, Page 11, Sorter
 		 * "Load two Blue and two Black Bars in the red tray as shown"
 		 *
-		 * This means there are 8 black bars in setup position
+		 * 2016.01.16, Page 11, Penalties
+		 * "Place four Black Bars off the Field out of the way"
+		 *
+		 * This means there are 12 black bars in setup position
 		 *
 		 * 2015.08.27, Page 24, M04, Specific physical requirement, Black bars
 		 * "Value: 8 Per Bar part of a scoring Flower Box, or in their original Setup position"
 		 *
 		 * As there is nothing else that scores points without touching it, the
-		 * initial score is 8 black bars * 8 points = 64 points
+		 * initial score is 12 black bars * 8 points = 96 points
 		 */
-		it('Should score base points', function()
+		it('Should score 96 base points', function()
 		{
-			expect(FllScorer.computeScore(FllScorer.initialMissionsState)).toEqual(64);
+			expect(FllScorer.computeScore(FllScorer.initialMissionsState)).toEqual(12*8);
 		});
 
 	});
@@ -529,20 +535,48 @@ describe('Robot Game 2015 specifications', function() {
 	describe('Penalties', function() {
 
 		/**
+		 * We will need the points when penalties=0 in the following assertions
+		 */
+		var pointsWithNoPenalties = FllScorer.computeScore({
+			penalties: 0
+		});
+
+		/**
+		 * 2016.01.16, Page 11, Penalties
+		 * "Place four Black Bars off the Field out of the way"
+		 * 2015.08.27, Page 24, M04, Specific physical requirement, Black bars
+		 * "Value: 8 Per Bar part of a scoring Flower Box, or in their original Setup position"
+		 *
+		 * 4 bars * 8 points = 32 initial points
+		 */
+		it('Scores 32 black bars points when no penalty', function()
+		{
+			expect(pointsWithNoPenalties).toEqual(4*8);
+		});
+
+		/**
+		 * 2016.01.16, Page 11, Penalties
+		 * "Place four Black Bars off the Field out of the way"
 		 * 2015.08.27, Page 25, Penalties
 		 * "the Ref will place one Black Bar on the Mat [...] Value: See SORTING mission, black bar details"
+		 *
+		 * 2015.08.27, Page 24, M04, Specific physical requirement, Black bars
+		 * "Value: 8 Per Bar part of a scoring Flower Box, or in their original Setup position"
 		 * 2015.08.27, Page 24, M04, Specific physical requirement
 		 * "Black bars are [...] Value: Minus 8 Per Bar anywhere else"
+		 *
+		 * So each penalty costs its "setup position" points and
+		 * the "anywhere else" penalty, that is, -(8+8) = -16 per penalty
 		 */
-		it('Costs 8 points per penalty', function()
+		it('Costs 16 points per penalty', function()
 		{
 			expect(FllScorer.computeScore({
 				penalties: 1
-			})).toEqual(-8);
+			})).toEqual(pointsWithNoPenalties - 16);
 
 			expect(FllScorer.computeScore({
 				penalties: 2
-			})).toEqual(-8*2);
+			})).toEqual(pointsWithNoPenalties - 16*2);
 		});
 
 		/**

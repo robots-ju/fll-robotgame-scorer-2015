@@ -476,12 +476,24 @@
 			}
 
 			/**
+			 * 
+			 * 2016.01.16, Page 11, Penalties
+			 * "Place four Black Bars off the Field out of the way"
+			 * 2015.08.27, Page 24, M04, Specific physical requirement, Black bars
+			 * "Value: 8 Per Bar part of a scoring Flower Box, or in their original Setup position"
+			 * 
+			 * As we put penalties in a separate counter, having 0 penalties must
+			 * score the equivalent of the 4 black bars in "setup position"
+			 */
+			score += 4 * 8;
+
+			/**
 			 * 2015.08.27, Page 25, Penalties
 			 * "the Ref will place one Black Bar on the Mat [...] Value: See SORTING mission, black bar details"
 			 * 2015.08.27, Page 24, M04, Specific physical requirement
 			 * "Black bars are [...] Value: Minus 8 Per Bar anywhere else"
 			 */
-			score += missions.penalties * -8;
+			score += missions.penalties * -16;
 		}
 
 		return score;
