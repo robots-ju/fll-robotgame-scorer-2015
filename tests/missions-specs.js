@@ -532,7 +532,7 @@ describe('Robot Game 2015 specifications', function() {
 		 * 2015.08.27, Page 25, M12, Specific physical requirement
 		 * "Value: 40 The Compost is perfectly nested inside one of the Packages [...]"
 		 */
-		it('Scores 85 points to demolish the building', function()
+		it('Scores 40 points to put compost in package', function()
 		{
 			expect(FllScorer.computeScore({
 				m12_compost_in_package: true
