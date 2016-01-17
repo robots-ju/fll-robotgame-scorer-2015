@@ -155,7 +155,7 @@
 			 */
 			if(missions.m02_methanes_collected > 2)
 			{
-				throw new sc.InvalidValueException('M01');
+				throw new sc.InvalidValueException('M02');
 			}
 
 			/**
