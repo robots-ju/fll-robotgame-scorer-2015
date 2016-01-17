@@ -425,14 +425,18 @@ describe('Robot Game 2015 specifications', function() {
 		});
 
 		/**
-		 * 2015.08.27, Page 24, M07, Specific physical requirement
+		 * 2016.01.17, Page 24/25, M07, Specific physical requirement
+		 * "Score Any That Apply"
+		 * "Value: 20 Per Animal *Animals are completely in any circle which is completely empty of Plastic Bags"
 		 * "Value: 35 The Chicken is completely in the small circle"
+		 *
+		 * So the chicken scores 20+35 = 55 points
 		 */
-		it('Scores 35 points to put the chicken in small circle', function()
+		it('Scores 55 points to put the chicken in small circle', function()
 		{
 			expect(FllScorer.computeScore({
 				m07_chicken_in_circle: true
-			})).toEqual(35);
+			})).toEqual(20+35);
 		});
 
 	});

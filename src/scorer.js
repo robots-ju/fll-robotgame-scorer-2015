@@ -365,10 +365,14 @@
 		if(missions.hasOwnProperty('m07_chicken_in_circle'))
 		{
 			/**
-			 * 2015.08.27, Page 24, M07, Specific physical requirement
+			 * 2016.01.17, Page 24/25, M07, Specific physical requirement
+			 * "Score Any That Apply"
+			 * "Value: 20 Per Animal *Animals are completely in any circle which is completely empty of Plastic Bags"
 			 * "Value: 35 The Chicken is completely in the small circle"
+			 *
+			 * So the chicken scores 20+35 = 55 points
 			 */
-			score += missions.m07_chicken_in_circle ? 35 : 0;
+			score += missions.m07_chicken_in_circle ? 55 : 0;
 		}
 
 		/*
